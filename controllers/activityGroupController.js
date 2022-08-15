@@ -75,11 +75,11 @@ class activityGroupController {
                 });
             }
 
-          return res.status(200).json({
-            status: Activity ? 'Success' : 'Not Found',
-            message: "Success",
-            data: Activity
-          });
+            return res.status(Activity ? 200 : 404).json({
+              status: Activity ? 'Success' : 'Not Found',
+              message: Activity ? 'Success' : `Activity with ID ${id} Not Found`,
+              data: Activity
+            });
         } catch (error) {
             next(error);
         }

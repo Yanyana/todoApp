@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const activityGroupController = require("../controllers/activityGroupController");
 
-const { body, validationResult } = require('express-validator');
+const { body } = require('express-validator');
 
 
 /* GET home page. */

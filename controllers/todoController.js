@@ -7,8 +7,40 @@ const { body, validationResult } = require('express-validator');
 class todoController {
     static async createTodo(req, res, next) {
 
+      let { activity_group_id, title } = req.body
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        let errorsLog = [];
+
+        errors.array().forEach(element => {
+          errorsLog.push({
+            message: element.msg,
+            type: "notNull Violation",
+            path: element.param,
+            value: element.value,
+            origin: "CORE",
+            instance: req.body,
+            validatorKey: "is_null",
+            validatorName: null,
+            validatorArgs: []
+          })            
+        });
+
+        return res.status(400).json({ 
+          name: "BadRequest",
+          message: errorsLog[0].message,
+          code: 400,
+          className: "bad-request",
+          data: {},
+          errors: errorsLog
+        });
+      }
+      
         try {
-          const newActivity = await models.todo_items.create({ ...req.body });
+          const newActivity = await models.todo_items.create({
+            activityGroupId: activity_group_id,
+            title: title
+          });
 
           return res.status(200).json({
             status: newActivity ? 'Success' : 'Not Found',
