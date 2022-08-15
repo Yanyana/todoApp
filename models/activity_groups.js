@@ -12,7 +12,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      models.activity_groups.hasMany(models.todo_items);
+      models.activity_groups.hasMany(models.todo_items, {
+        foreignKey: "activityGroupId",
+        targetKey: "id",
+      });
     }
   }
   activity_groups.init({
