@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "dell",
+    "password": "!Q2w3e4r5t6y",
+    "database": "todo",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "dell",
+    "password": "!Q2w3e4r5t6y",
+    "database": "todo",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "dell",
+    "password": "!Q2w3e4r5t6y",
+    "database": "todo",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
