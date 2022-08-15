@@ -61,25 +61,24 @@ class todoController {
 
             if (id) {
                 todoItems = await models.todo_items.findOne({ 
-                    where: { activity_group_id: id },
+                    where: { id },
                     offset: 0,
                     limit: limit,
-                    attributes: ['id','title', 'activity_group_id', 'is_active', 'priority']
+                    attributes: ['id','title', ['isActive', 'is_active'], 'priority']
                 });
             } else {
                 todoItems = await models.todo_items.findAll({ 
-                    where: { activity_group_id },
                     offset: 0,
                     limit: limit,
-                    attributes: ['id','title', 'activity_group_id', 'is_active', 'priority']
+                    attributes: ['id','title', ['isActive', 'is_active'], 'priority']
                 });
             }
 
-          return res.status(200).json({
-            status: todoItems ? 'Success' : 'Not Found',
-            message: "Success",
-            data: todoItems
-          });
+            return res.status(todoItems ? 200 : 404).json({
+              status: todoItems ? 'Success' : 'Not Found',
+              message: todoItems ? 'Success' : `No record found for id '${id}'`,
+              data: todoItems
+            });
         } catch (error) {
             next(error);
         }
@@ -116,10 +115,17 @@ class todoController {
             plain: true
           });
 
+          const Todo = await models.todo_items.findOne({
+            where: {
+              id
+            },
+            attributes: ['id',['activityGroupId','activity_group_id'], 'title', ['isActive', 'is_active'], 'priority', ['createdAt', 'created_at'], ['updatedAt', 'updated_at']]
+          })
+
           return res.status(200).json({
-            status: Todos ? 'Success' : 'Not Found',
-            message: Todos ? 'Success' : `Activity with ID ${id} Not Found`,
-            data: {}
+            status: Todo ? 'Success' : 'Not Found',
+            message: Todo ? 'Success' : `Activity with ID ${id} Not Found`,
+            data: Todo
           });
         } catch (error) {
             next(error);
