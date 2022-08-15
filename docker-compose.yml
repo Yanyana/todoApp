@@ -12,13 +12,13 @@ services:
     # volumes:
     #   - db:/var/lib/mysql
     
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 89:8080
-    depends_on:
-      - mysqldb
+  # adminer:
+  #   image: adminer
+  #   restart: always
+  #   ports:
+  #     - 89:8080
+  #   depends_on:
+  #     - mysqldb
 
   app:
     depends_on:
@@ -26,7 +26,7 @@ services:
     build: ./
     restart: unless-stopped
     env_file: .env
-    command: sh -c "npx sequelize-cli db:migrate --config config/config.json"
+    # command: sh -c "npx sequelize-cli db:migrate --config config/config.json"
     ports:
       - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
     environment:
