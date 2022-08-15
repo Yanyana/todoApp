@@ -11,10 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      models.activity_groups.belongsTo(models.todo_items, {
-        foreignKey: "activity_group_id",
-        targetKey: "id",
-      });
+      models.activity_groups.belongsTo(models.todo_items);
     }
   }
   todo_items.init({
@@ -28,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    activity_group_id: {
+    activityGroupId: {
       type: DataTypes.INTEGER,
       values: {
         actGroupValidator(value) {
@@ -38,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    is_active: DataTypes.BOOLEAN,
+    isActive: DataTypes.BOOLEAN,
     priority: {
       type: DataTypes.ENUM,
       values: ['very-high', 'high', 'normal', 'low', 'very-low']

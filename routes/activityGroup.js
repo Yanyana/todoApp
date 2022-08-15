@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
 
 // router.post("/activity-groups", activityGroupController.createActivityGroup);
 router.post('/activity-groups', 
-  body('username')
+  body('title')
   .isLength({ min: 1 })
   .withMessage('notNull Violation: activity_groups.title cannot be null'), (req, res, next) => {
   activityGroupController.createActivityGroup(req, res, next)
@@ -30,7 +30,9 @@ router.delete('/activity-groups/:id', (req, res, next) => {
   activityGroupController.deleteActivityGroup(req, res, next)
 });
 
-router.patch('/activity-groups/:id', (req, res, next) => {
+router.patch('/activity-groups/:id', body('title')
+.isLength({ min: 1 })
+.withMessage('notNull Violation: activity_groups.title cannot be null'), (req, res, next) => {
   activityGroupController.updateActivityGroup(req, res, next)
 });
 

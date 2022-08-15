@@ -12,12 +12,12 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      activity_group_id: {
+      activityGroupId: {
         type: Sequelize.INTEGER,
         references: { model: 'activity_groups', key: 'id' },
         allowNull: false
       },
-      is_active: {
+      isActive: {
         type: Sequelize.BOOLEAN,
         defaultValue: true
       },
