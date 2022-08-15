@@ -2,13 +2,19 @@ var express = require('express');
 var router = express.Router();
 const activityGroupController = require("../controllers/activityGroupController");
 
+const { body, validationResult } = require('express-validator');
+
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
 // router.post("/activity-groups", activityGroupController.createActivityGroup);
-router.post('/activity-groups', (req, res, next) => {
+router.post('/activity-groups', 
+  body('username')
+  .isLength({ min: 1 })
+  .withMessage('notNull Violation: activity_groups.title cannot be null'), (req, res, next) => {
   activityGroupController.createActivityGroup(req, res, next)
 });
 

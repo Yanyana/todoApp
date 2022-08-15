@@ -5,7 +5,8 @@ const { Op } = require("sequelize");
 const { body, validationResult } = require('express-validator');
 
 class activityGroupController {
-    static async createActivityGroup(req, res, next) {    
+    static async createActivityGroup(req, res, next) {
+        
         try {
           const newActivity = await models.activity_groups.create({ ...req.body });
 
