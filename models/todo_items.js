@@ -11,7 +11,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      models.activity_groups.belongsTo(models.todo_items);
+      models.activity_groups.belongsTo(models.todo_items, {
+        foreignKey: "activityGroupId",
+        targetKey: "id",
+      });
     }
   }
   todo_items.init({
